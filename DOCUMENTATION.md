@@ -35,11 +35,39 @@ If you are not already familiar with Movebank, spend some time with the [Trackin
 
 ### 1. One-Time Setup
 
-```bash
-# Install packages (if using pip)
-pip install requests pandas
+**Option 1: Using Virtual Environment (Recommended)**
 
-# OR create a new conda environment
+Windows (PowerShell/Command Prompt):
+```cmd
+# Create virtual environment
+python -m venv .venv
+
+# Activate it
+.venv\Scripts\activate
+
+# Install packages
+pip install requests pandas
+```
+
+Linux/Mac:
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate it
+source .venv/bin/activate
+
+# Install packages
+pip install requests pandas
+```
+
+**Option 2: Install Globally**
+```bash
+pip install requests pandas
+```
+
+**Option 3: Using Conda (if you have Anaconda/Miniconda)**
+```bash
 conda create -n movebank_env python=3.11 -y
 conda activate movebank_env
 conda install -c conda-forge requests pandas -y
@@ -104,7 +132,46 @@ python fetch_movebank_data.py --output my_custom_folder
 
 ## Setup Instructions
 
-### Setup Process
+### Option 1: Using Virtual Environment (Recommended)
+
+**Windows (PowerShell/Command Prompt):**
+```cmd
+# Navigate to project directory
+cd d:\MBRP\movebank-api-doc
+
+# Create virtual environment
+python -m venv .venv
+
+# Activate it
+.venv\Scripts\activate
+
+# Install required packages
+pip install requests pandas
+```
+
+**Linux/Mac:**
+```bash
+# Navigate to project directory
+cd /path/to/movebank-api-doc
+
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate it
+source .venv/bin/activate
+
+# Install required packages
+pip install requests pandas
+```
+
+### Option 2: Install Globally (No Virtual Environment)
+
+```bash
+# Install packages system-wide
+pip install requests pandas
+```
+
+### Option 3: Using Conda (if you have Anaconda/Miniconda)
 
 ```bash
 # Create new conda environment
@@ -121,15 +188,36 @@ conda install -c conda-forge requests pandas -y
 
 Test that everything is working:
 
+**If using virtual environment:**
 ```bash
-# Activate environment (if using conda)
-conda activate movebank_env
+# Activate environment first
+# Windows: .venv\Scripts\activate
+# Linux/Mac: source .venv/bin/activate
 
-# Set credentials
+# Set credentials (PowerShell)
 $env:mbus='your_username'
 $env:mbpw='your_password'
 
 # List available sensors
+python fetch_movebank_data.py --list-sensors
+```
+
+**If using conda:**
+```bash
+# Activate environment
+conda activate movebank_env
+
+# Set credentials and test
+$env:mbus='your_username'
+$env:mbpw='your_password'
+python fetch_movebank_data.py --list-sensors
+```
+
+**If installed globally:**
+```bash
+# Set credentials and test
+$env:mbus='your_username'
+$env:mbpw='your_password'
 python fetch_movebank_data.py --list-sensors
 ```
 
@@ -507,28 +595,46 @@ When you run the script, it creates a folder (default: `movebank_data/`) with th
 - Try `--list-sensors` to see what's available
 - Check your time range isn't too restrictive
 
-### "conda: command not found"
+### "python: command not found" or "python3: command not found"
+- Make sure Python is installed (download from [python.org](https://www.python.org/downloads/))
+- On Windows, make sure Python is added to PATH during installation
+- On Linux/Mac, try using `python3` instead of `python`
+
+### "No module named 'requests'" or "No module named 'pandas'"
+- Make sure you've installed the required packages: `pip install requests pandas`
+- If using a virtual environment, make sure it's activated
+- If using conda, make sure the environment is activated
+
+### "conda: command not found" (only if using conda)
 - Make sure Anaconda or Miniconda is installed
 - Make sure conda is in your PATH
 - Try restarting your terminal
+- Or use the virtual environment method instead (doesn't require conda)
 
 ### "Environment not found"
-- Manually create the environment as shown in the Setup Instructions section
+- If using virtual environment: Create it with `python -m venv .venv`
+- If using conda: Create it as shown in the Setup Instructions section
 
 ### pandas/numpy import errors
-- The new environment should fix this
-- If issues persist, try: `conda install pandas numpy -c conda-forge --force-reinstall`
-- Make sure you've activated the correct environment: `conda activate movebank_env`
+- Reinstall the packages: `pip install --upgrade requests pandas`
+- If using conda: `conda install pandas numpy -c conda-forge --force-reinstall`
+- Make sure you've activated your environment before running the script
 
 ### Important Notes for Each Session
 
-1. You must activate the conda environment each time you open a new terminal (if using conda):
+**If using virtual environment:**
+1. You must activate the virtual environment each time you open a new terminal:
+   - Windows: `.venv\Scripts\activate`
+   - Linux/Mac: `source .venv/bin/activate`
+
+**If using conda:**
+1. You must activate the conda environment each time you open a new terminal:
    ```bash
    conda activate movebank_env
    ```
 
+**For all methods:**
 2. You must set credentials each time you open a new terminal (if using environment variables method)
-
 3. All setup steps must be done in the same terminal session
 
 ---
