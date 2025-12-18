@@ -35,13 +35,6 @@ If you are not already familiar with Movebank, spend some time with the [Trackin
 
 ### 1. One-Time Setup
 
-**Option A: Automated Setup (Easiest)**
-```cmd
-# Run the setup script
-setup_environment.bat
-```
-
-**Option B: Manual Setup**
 ```bash
 # Install packages (if using pip)
 pip install requests pandas
@@ -111,26 +104,7 @@ python fetch_movebank_data.py --output my_custom_folder
 
 ## Setup Instructions
 
-### Quick Setup (Automated)
-
-1. Open Command Prompt or PowerShell
-2. Navigate to this directory:
-   ```cmd
-   cd d:\MBRP\movebank-api-doc
-   ```
-3. Run the setup script:
-   ```cmd
-   setup_environment.bat
-   ```
-
-This will automatically:
-- Create a new conda environment called `movebank_env`
-- Install Python 3.11
-- Install required packages (requests, pandas)
-
-### Manual Setup
-
-If you prefer to set up manually:
+### Setup Process
 
 ```bash
 # Create new conda environment
@@ -539,8 +513,7 @@ When you run the script, it creates a folder (default: `movebank_data/`) with th
 - Try restarting your terminal
 
 ### "Environment not found"
-- Run `setup_environment.bat` first
-- Or manually create the environment as shown above
+- Manually create the environment as shown in the Setup Instructions section
 
 ### pandas/numpy import errors
 - The new environment should fix this
