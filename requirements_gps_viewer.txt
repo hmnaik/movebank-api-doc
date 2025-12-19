@@ -1,0 +1,8 @@
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+folium>=0.14.0
+earthengine-api>=0.1.350
+astral>=3.2
+pytz>=2024.1
+contextily>=1.5.0
